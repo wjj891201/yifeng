@@ -24,6 +24,18 @@ Route::group('', function() {
     Route::get('/classs/edit/:id', 'Classs/edit')->name("classs.edit");
     Route::post('/classs/update/:id', 'Classs/update')->name("classs.update");
     Route::post('/classs/delete/:id', 'Classs/delete')->name("classs.delete");
+    //参数配置
+    Route::get('/classitem/:classid$','Classitem/index')->name("classitem");
+    Route::get('/classitem/create/:classid','Classitem/create')->name("classitem.create");
+    Route::post('/classitem/save','Classitem/save')->name("classitem.save");
+    Route::get('/classitem/edit/:id','Classitem/edit')->name("classitem.edit");
+    Route::post('/classitem/update/:id','Classitem/update')->name("classitem.update");
+    Route::post('/classitem/delete/:id','Classitem/delete')->name("classitem.delete");
+    //会员管理
+    Route::get('/users/list','Users/index')->name("users");
+    Route::post('/users/delete/:id','Users/delete')->name("users.delete");
+    Route::post('/users/status/:id','Users/status')->name("users.status");
+    Route::post('/users/level/:id','Users/level')->name("users.level");
 })->middleware(\app\middleware\CheckAdminLgoin::class);
 //登录
 Route::get('login', 'Login/login')->name('login');

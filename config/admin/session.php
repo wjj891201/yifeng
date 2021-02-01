@@ -21,7 +21,7 @@ return [
     // 驱动方式 支持file redis memcache memcached
     'type'           => 'file',
     // 过期时间
-    'expire'         => 1200,
+    'expire'         => 3600,
     // 前缀
     'prefix'         => '',
 ];

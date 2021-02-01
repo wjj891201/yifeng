@@ -3,9 +3,8 @@
 use think\migration\Seeder;
 use think\facade\Db;
 
-class SeederManager extends Seeder
+class SeederUsers extends Seeder
 {
-
     /**
      * Run Method.
      *
@@ -16,11 +15,13 @@ class SeederManager extends Seeder
      */
     public function run()
     {
-//        $data = [
-//            'username' => 'admin',
-//            'password' => password_hash('123456', PASSWORD_DEFAULT)
-//        ];
-//        Db::name('manager')->save($data);
+        $data = [];
+        for ($i = 1; $i < 100; $i++) {
+            $data[] = [
+                'username' => 'test' . $i,
+                'password' => password_hash("123456", PASSWORD_DEFAULT),
+            ];
+        }
+        Db::name('users')->insertAll($data);
     }
-
 }

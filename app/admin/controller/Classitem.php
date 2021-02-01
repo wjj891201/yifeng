@@ -2,24 +2,24 @@
 
 namespace app\admin\controller;
 
-use think\facade\View;
 use think\Request;
-use \app\admin\model\Classs as ClasssModel;
+use think\facade\View;
+use \app\admin\model\Classitem as ClassitemModel;
 
-class Classs
+class Classitem
 {
-
     /**
      * 显示资源列表
-     * 显示列表
+     *
      * @return \think\Response
      */
-    public function index()
+    public function index($classid)
     {
         //读取数据
-        $list = ClasssModel::getList(1);
+        $list = ClassitemModel::getList($classid);
         //分配到模板
         View::assign('list', $list);
+        View::assign('classid', $classid);
         return view();
     }
 
@@ -28,27 +28,28 @@ class Classs
      *
      * @return \think\Response
      */
-    public function create()
+    public function create($classid)
     {
+        View::assign('classid', $classid);
         return view();
     }
 
     /**
      * 保存新建的资源
      *
-     * @param  \think\Request  $request
+     * @param \think\Request $request
      * @return \think\Response
      */
     public function save(Request $request)
     {
         $data = $request->post();
-        return json(ClasssModel::store($data));
+        return json(ClassitemModel::store($data));
     }
 
     /**
      * 显示指定的资源
      *
-     * @param  int  $id
+     * @param int $id
      * @return \think\Response
      */
     public function read($id)
@@ -59,38 +60,38 @@ class Classs
     /**
      * 显示编辑资源表单页.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \think\Response
      */
     public function edit($id)
     {
-        $classs = ClasssModel::find($id);
-        View::assign('classs', $classs);
+        //获取编辑的内容
+        $classitem = (new ClassitemModel())->find($id);
+        View::assign("classitem", $classitem);
         return view();
     }
 
     /**
      * 保存更新的资源
      *
-     * @param  \think\Request  $request
-     * @param  int  $id
+     * @param \think\Request $request
+     * @param int $id
      * @return \think\Response
      */
     public function update(Request $request, $id)
     {
         $data = $request->post();
-        return json(ClasssModel::_update($id, $data));
+        return json(ClassitemModel::_update($id, $data));
     }
 
     /**
      * 删除指定资源
      *
-     * @param  int  $id
+     * @param int $id
      * @return \think\Response
      */
     public function delete($id)
     {
-        return json(ClasssModel::_del($id));
+        return json(ClassitemModel::_del($id));
     }
-
 }
