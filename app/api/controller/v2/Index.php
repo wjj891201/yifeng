@@ -7,12 +7,12 @@ class Index
 {
     public function index()
     {
-        return '您好！这是一个[api]示例应用-v1';
+        return '您好！这是一个[api]示例应用-v2';
     }
 
     // 测试接口
     public function test()
     {
-        return "测试接口-v1";
+        return "测试接口-v2";
     }
 }

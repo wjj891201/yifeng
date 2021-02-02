@@ -27,12 +27,13 @@ class BaseValidate extends Validate
     }
 
     //设置错误码
-    protected function username($value, $rule, $data=[])
+    protected function username($value, $rule, $data = [])
     {
         $this->errorcode = 100000;
         return true;
     }
-    protected function password($value, $rule, $data=[])
+
+    protected function password($value, $rule, $data = [])
     {
         $this->errorcode = 100001;
         return true;

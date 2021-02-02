@@ -21,11 +21,11 @@ trait Checkdata
     protected function checkTime()
     {
         if (!$this->request->has("timestamp") || intval($this->request->get("timestamp")) <= 1 || strlen($this->request->get("timestamp")) !== 10) {
-            throw new HttpExceptions(400, "时间戳错误",19997);
+            throw new HttpExceptions(400, "时间戳错误", 19997);
         }
 
         if (abs(time() - intval($this->request->get("timestamp"))) > 60) {
-            throw new HttpExceptions(400, "请求超时",19997);
+            throw new HttpExceptions(400, "请求超时", 19997);
         }
     }
 
@@ -33,12 +33,12 @@ trait Checkdata
     {
 
         if ($this->request->header("sign") == null) {
-            throw new HttpExceptions(400, "签名参数错误",19997);
+            throw new HttpExceptions(400, "签名参数错误", 19997);
         }
         //验证签名
         $sign = $this->createSign();
         if ($this->request->header("sign") != $sign) {
-            throw new HttpExceptions(400, "签名错误",19997);
+            throw new HttpExceptions(400, "签名错误", 19997);
         }
     }
 

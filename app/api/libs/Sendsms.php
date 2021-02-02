@@ -16,7 +16,8 @@ use think\facade\Cache;
 class Sendsms
 {
     private $phone = "";
-    private $expire_time=300;
+    private $expire_time = 300;
+
     public function __construct($phone)
     {
         $this->phone = $phone;
