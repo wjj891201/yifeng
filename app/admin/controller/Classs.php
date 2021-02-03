@@ -17,7 +17,7 @@ class Classs
     public function index()
     {
         //读取数据
-        $list = ClasssModel::getList(1);
+        $list = ClasssModel::getList(10);
         //分配到模板
         View::assign('list', $list);
         return view();

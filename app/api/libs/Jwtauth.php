@@ -75,7 +75,7 @@ class Jwtauth
     {
         $time = time();
         $signer = new Sha256();
-        $this->token = (new Builder())->issuedBy('http://api.yifeng.com') // Configures the issuer (iss claim)
+        $this->token = (new Builder())->issuedBy('http://api.yifeng.deve') // Configures the issuer (iss claim)
         ->identifiedBy('apiyifengcom', true) // Configures the id (jti claim), replicating as a header item
         ->issuedAt($time) // Configures the time that the token was issue (iat claim)
         ->canOnlyBeUsedAfter($time + 60) // Configures the time that the token can be used (nbf claim)
@@ -89,7 +89,7 @@ class Jwtauth
     {
         $time = time();
         $data = new ValidationData();
-        $data->setIssuer('http://api.yifeng.com');
+        $data->setIssuer('http://api.yifeng.deve');
         $data->setId('apiyifengcom');
         $data->setCurrentTime($time + 60);
         $signer = new Sha256();

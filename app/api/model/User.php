@@ -49,7 +49,6 @@ class User extends Model
         //验证密码是否正确
         if (!password_verify($data['password'], $user['password'])) {
             throw new HttpExceptions(403, "密码不正确", 10001);
-
         }
         //验证用户状态
         if ($user['status']) {
