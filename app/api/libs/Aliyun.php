@@ -7,6 +7,7 @@ use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;
 use app\exception\HttpExceptions;
+use think\facade\Config;
 
 /**
  * 接入阿里云服务（短信服务）
@@ -22,10 +23,11 @@ class Aliyun
 
     public function __construct()
     {
-        $this->AccessKeyId = config("Aliyun.Sms.AccessKeyId");
-        $this->AccessKeySecret = config("Aliyun.Sms.AccessKeySecret");
-        $this->SignName = config("Aliyun.Sms.SignName");
-        $this->TemplateCode = config("Aliyun.Sms.TemplateCode");
+        $Aliyun = Config::load('api/Aliyun', 'api');
+        $this->AccessKeyId = $Aliyun['Sms']['AccessKeyId'];
+        $this->AccessKeySecret = $Aliyun['Sms']['AccessKeySecret'];
+        $this->SignName = $Aliyun['Sms']['SignName'];
+        $this->TemplateCode = $Aliyun['Sms']['TemplateCode'];
     }
 
 
@@ -34,7 +36,6 @@ class Aliyun
         AlibabaCloud::accessKeyClient($this->AccessKeyId, $this->AccessKeySecret)
             ->regionId('cn-hangzhou')
             ->asDefaultClient();
-
         try {
             $result = AlibabaCloud::rpc()
                 ->product('Dysmsapi')
@@ -59,6 +60,7 @@ class Aliyun
             } else {
                 throw new HttpExceptions(403, $result['Message'], 19999);
             }
+            print_r($result->toArray());
         } catch (ClientException $e) {
             throw new HttpExceptions(403, "短信服务异常", 19999);
         } catch (ServerException $e) {

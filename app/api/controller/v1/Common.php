@@ -19,7 +19,7 @@ class Common extends BaseController
         //判断时间戳是否存在
         // var_dump($this->checkTime());exit;
         $this->checkTime();
-        $this->checkSign();
+//        $this->checkSign();
     }
 
 
